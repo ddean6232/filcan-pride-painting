@@ -243,15 +243,17 @@
     </section>
 
     <!-- Lead Generation Zone -->
-    <section id="quote" class="py-24 bg-brand-blue relative overflow-hidden">
-      <!-- Background Graphic -->
-      <div class="absolute -top-24 -right-24 w-96 h-96 bg-blue-800 rounded-full opacity-50 mix-blend-multiply blur-3xl z-0"></div>
-      <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-brand-red rounded-full opacity-20 mix-blend-multiply blur-3xl z-0"></div>
+    <section id="quote" class="py-24 bg-brand-blue relative">
+      <!-- Background Graphic (contained so it doesn't clip form) -->
+      <div class="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        <div class="absolute -top-24 -right-24 w-96 h-96 bg-blue-800 rounded-full opacity-50 mix-blend-multiply blur-3xl"></div>
+        <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-brand-red rounded-full opacity-20 mix-blend-multiply blur-3xl"></div>
+      </div>
       
       <div class="container mx-auto px-4 relative z-10">
         <div class="flex flex-col lg:flex-row gap-16">
           <!-- Form Section -->
-          <div class="w-full lg:w-1/2 bg-white rounded-2xl p-8 lg:p-12 shadow-2xl">
+          <div class="w-full lg:w-1/2 bg-white rounded-2xl p-8 lg:p-12 pb-12 lg:pb-14 shadow-2xl">
             <h3 class="text-2xl md:text-3xl font-heading font-bold mb-2 text-brand-dark">Request a Free Estimate</h3>
             <p class="text-gray-600 mb-8">Fill out the quick form below and we'll reach out within 24 hours.</p>
             
