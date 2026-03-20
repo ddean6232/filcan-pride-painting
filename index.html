@@ -42,6 +42,20 @@
     </style>
   </head>
   <body>
+    <!-- Success Modal -->
+    <div id="success-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+      <div class="bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl transform transition-all duration-300 scale-95 opacity-0" id="modal-content">
+        <div class="text-center">
+          <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+          </div>
+          <h3 class="text-2xl font-heading font-bold mb-4 text-brand-dark">Thank you for your query!</h3>
+          <p class="text-gray-600 mb-8 leading-relaxed">We have received your message. We will get back to you shortly!</p>
+          <button id="close-modal-btn" class="w-full btn-primary py-3 rounded-lg font-bold">Done</button>
+        </div>
+      </div>
+    </div>
+
     <!-- Header -->
     <header class="fixed w-full top-0 bg-white shadow z-50 transition-all duration-300">
       <div class="container mx-auto px-4 py-2 flex justify-between items-center">
@@ -538,18 +552,5 @@
         });
       }
     </script>
-    <!-- Success Modal -->
-    <div id="success-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
-      <div class="bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl transform transition-all duration-300 scale-95 opacity-0" id="modal-content">
-        <div class="text-center">
-          <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-          </div>
-          <h3 class="text-2xl font-heading font-bold mb-4 text-brand-dark">Thank you for your query!</h3>
-          <p class="text-gray-600 mb-8 leading-relaxed">We have received your message. We will get back to you shortly!</p>
-          <button id="close-modal-btn" class="w-full btn-primary py-3 rounded-lg font-bold">Done</button>
-        </div>
-      </div>
-    </div>
   </body>
 </html>
