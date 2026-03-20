@@ -6,40 +6,8 @@
     <title>Filcan Pride Painting Ltd | Premium Painting Services</title>
     <meta name="description" content="Premium Interior & Exterior Painting Services Across Alberta & B.C. Transforming spaces in Edmonton and Calgary with professional precision and pride." />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              'brand-blue': '#1E4E79',
-              'brand-red': '#D32F2F',
-              'brand-gold': '#F2A900',
-              'brand-dark': '#0B1F34',
-            },
-            fontFamily: {
-              'heading': ['"Playfair Display"', 'serif'],
-              'sans': ['Inter', 'sans-serif'],
-            }
-          }
-        }
-      }
-    </script>
-    <style type="text/tailwindcss">
-      @layer base {
-        html { scroll-behavior: smooth; }
-        body { @apply font-sans text-gray-800 antialiased bg-gray-50; }
-        h1, h2, h3, h4, h5, h6 { @apply font-heading text-brand-dark; }
-      }
-      @layer components {
-        .btn-primary { @apply inline-block bg-brand-red text-white font-medium px-6 py-3 rounded shadow hover:opacity-90 transition-opacity duration-300 cursor-pointer; }
-        .btn-secondary { @apply inline-block bg-brand-blue text-white font-medium px-6 py-3 rounded shadow hover:opacity-90 transition-opacity duration-300 cursor-pointer; }
-        .btn-outline { @apply inline-block border-2 border-brand-blue text-brand-blue font-medium px-6 py-3 rounded hover:bg-brand-blue hover:text-white transition-colors duration-300 cursor-pointer; }
-      }
-    </style>
+    <script type="module" crossorigin src="/assets/index-32z61dBc.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BJNaFDNM.css">
   </head>
   <body>
     <!-- Header -->
@@ -356,27 +324,5 @@
       </div>
     </footer>
 
-    <script>
-      const mobileBtn = document.getElementById('mobile-menu-btn');
-      const mobileMenu = document.getElementById('mobile-menu');
-      if(mobileBtn && mobileMenu) {
-        mobileBtn.addEventListener('click', () => {
-          mobileMenu.classList.toggle('hidden');
-        });
-      }
-      document.querySelectorAll('.mobile-link').forEach(link => {
-        link.addEventListener('click', () => {
-          mobileMenu?.classList.add('hidden');
-        });
-      });
-      // Optionally handle form submit for demo purposes
-      document.getElementById('contact-form')?.addEventListener('submit', (e) => {
-        const action = e.target.getAttribute('action');
-        if(!action || action.includes('zapier.com')) {
-           // We keep the default Zapier POST behavior or alert if it's a test
-           // e.preventDefault(); alert("Thanks for submitting! We will contact you soon.");
-        }
-      });
-    </script>
   </body>
 </html>
