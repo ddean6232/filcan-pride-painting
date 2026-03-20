@@ -435,14 +435,41 @@
           mobileMenu?.classList.add('hidden');
         });
       });
-      // Optionally handle form submit for demo purposes
-      document.getElementById('contact-form')?.addEventListener('submit', (e) => {
-        const action = e.target.getAttribute('action');
-        if(!action || action.includes('zapier.com')) {
-           // We keep the default Zapier POST behavior or alert if it's a test
-           // e.preventDefault(); alert("Thanks for submitting! We will contact you soon.");
-        }
-      });
+      // Handle form submission and show modal
+      const contactForm = document.getElementById('contact-form');
+      const successModal = document.getElementById('success-modal');
+      const modalContent = document.getElementById('modal-content');
+      const closeModalBtn = document.getElementById('close-modal-btn');
+
+      if (contactForm && successModal && modalContent && closeModalBtn) {
+        contactForm.addEventListener('submit', (e) => {
+          e.preventDefault(); // Prevent actual submission for demo purposes
+          
+          // Show modal with animation
+          successModal.classList.remove('hidden');
+          setTimeout(() => {
+            modalContent.classList.remove('scale-95', 'opacity-0');
+            modalContent.classList.add('scale-100', 'opacity-100');
+          }, 10);
+        });
+
+        closeModalBtn.addEventListener('click', () => {
+          // Hide modal with animation
+          modalContent.classList.add('scale-95', 'opacity-0');
+          modalContent.classList.remove('scale-100', 'opacity-100');
+          setTimeout(() => {
+            successModal.classList.add('hidden');
+            contactForm.reset();
+            // Reset to step 1
+            const step1 = document.getElementById('form-step-1');
+            const step2 = document.getElementById('form-step-2');
+            if (step1 && step2) {
+              step1.style.display = 'block';
+              step2.style.display = 'none';
+            }
+          }, 300);
+        });
+      }
       // Before/After Slider Logic
       const slider = document.getElementById('comparison-slider');
       const beforeImage = document.getElementById('before-image');
@@ -511,5 +538,18 @@
         });
       }
     </script>
+    <!-- Success Modal -->
+    <div id="success-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+      <div class="bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl transform transition-all duration-300 scale-95 opacity-0" id="modal-content">
+        <div class="text-center">
+          <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+          </div>
+          <h3 class="text-2xl font-heading font-bold mb-4 text-brand-dark">Thank you for your query!</h3>
+          <p class="text-gray-600 mb-8 leading-relaxed">We have received your message. We will get back to you shortly!</p>
+          <button id="close-modal-btn" class="w-full btn-primary py-3 rounded-lg font-bold">Done</button>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
