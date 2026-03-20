@@ -207,8 +207,7 @@
           <div class="w-full lg:w-1/2 rounded-2xl overflow-hidden shadow-2xl relative">
             <img src="https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Professional Painter" class="w-full h-auto object-cover"/>
             <div class="absolute bottom-0 left-0 bg-brand-blue p-6 text-white">
-              <h4 class="font-heading text-xl font-bold">Dario B. Alcantara</h4>
-              <p class="text-sm opacity-90">Owner & Master Painter</p>
+              <p class="font-heading text-xl font-bold">Owner & Master Painter</p>
             </div>
           </div>
           <div class="w-full lg:w-1/2">
@@ -218,7 +217,7 @@
               At Filcan Pride Painting Ltd, our name reflects our heritage and our work ethic. We merge the hardworking spirit of the Filipino-Canadian community with uncompromising standards of quality and resilience.
             </p>
             <p class="text-gray-600 leading-relaxed mb-8">
-              Led by Dario B. Alcantara, our team treats every property—whether a cozy residential interior or an expansive commercial exterior—with the utmost respect. We don't just apply paint; we meticulously prepare surfaces, choose premium materials, and deliver a flawless finish that stands the test of time and weather.
+              Our team treats every property—whether a cozy residential interior or an expansive commercial exterior—with the utmost respect. We don't just apply paint; we meticulously prepare surfaces, choose premium materials, and deliver a flawless finish that stands the test of time and weather.
             </p>
             <ul class="space-y-4 mb-8">
               <li class="flex items-center gap-3">
@@ -254,7 +253,7 @@
             <h3 class="text-2xl md:text-3xl font-heading font-bold mb-2 text-brand-dark">Request a Free Estimate</h3>
             <p class="text-gray-600 mb-8">Fill out the quick form below and we'll reach out within 24 hours.</p>
             
-            <form id="contact-form" action="https://hooks.zapier.com/hooks/catch/123456/abcde/" method="POST">
+            <form id="contact-form" action="https://hooks.zapier.com/hooks/catch/123456/abcde/" method="POST" class="min-h-[460px]">
               
               <!-- Step 1 -->
               <div id="form-step-1">
@@ -420,9 +419,8 @@
           </div>
         </div>
         
-        <div class="text-center text-xs text-gray-500 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
+        <div class="text-center text-xs text-gray-500 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-center items-center">
           <p>&copy; 2026 Filcan Pride Painting Ltd. All rights reserved.</p>
-          <p class="mt-2 md:mt-0">Dario B. Alcantara - Owner</p>
         </div>
       </div>
     </footer>
@@ -495,13 +493,24 @@
       const prevBtn = document.getElementById('prev-step-btn');
       
       if(step1 && step2 && nextBtn && prevBtn) {
+        const scrollToFormTop = () => {
+          const section = document.getElementById('quote');
+          if (section) {
+            const yOffset = -100;
+            const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
+            window.scrollTo({top: y, behavior: 'smooth'});
+          }
+        };
+
         nextBtn.addEventListener('click', () => {
           step1.style.display = 'none';
           step2.style.display = 'block';
+          scrollToFormTop();
         });
         prevBtn.addEventListener('click', () => {
           step2.style.display = 'none';
           step1.style.display = 'block';
+          scrollToFormTop();
         });
       }
     </script>
