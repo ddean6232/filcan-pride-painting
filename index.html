@@ -264,7 +264,7 @@
             <h3 class="text-2xl md:text-3xl font-heading font-bold mb-2 text-brand-dark">Request a Free Estimate</h3>
             <p class="text-gray-600 mb-8">Fill out the quick form below and we'll reach out within 24 hours.</p>
             
-            <form id="contact-form" action="https://hooks.zapier.com/hooks/catch/123456/abcde/" method="POST" class="min-h-[460px]">
+            <form id="contact-form" onsubmit="return false;" class="min-h-[460px]">
               
               <!-- Step 1 -->
               <div id="form-step-1">
@@ -457,14 +457,17 @@
 
       if (contactForm && successModal && modalContent && closeModalBtn) {
         contactForm.addEventListener('submit', (e) => {
-          e.preventDefault(); // Prevent actual submission for demo purposes
+          e.preventDefault(); 
           
+          // Debugging log (visible in console)
+          console.log('Form submission intercepted');
+
           // Show modal with animation
           successModal.classList.remove('hidden');
           setTimeout(() => {
             modalContent.classList.remove('scale-95', 'opacity-0');
             modalContent.classList.add('scale-100', 'opacity-100');
-          }, 10);
+          }, 50);
         });
 
         closeModalBtn.addEventListener('click', () => {
