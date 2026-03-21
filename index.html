@@ -887,7 +887,7 @@
               </div>
             </div>
           </div>
-          <!-- Slide 3 (Reviews 7, 8 + repeat 1) -->
+          <!-- Slide 3 (Reviews 7, 8, 9) -->
           <div class="flex-shrink-0 w-full grid grid-cols-1 md:grid-cols-3 gap-8 px-2">
             <!-- Review 7 -->
             <div class="p-8 bg-gray-50 rounded-2xl border border-gray-100 flex flex-col h-full shadow-sm">
@@ -907,13 +907,40 @@
                 <div><span class="block text-brand-dark font-black text-xs uppercase">Maria S.</span><span class="block text-gray-400 text-[10px] uppercase font-bold">Calgary, AB</span></div>
               </div>
             </div>
-            <!-- Review 1 Repeat for Grid Symmetry -->
-            <div class="p-8 bg-gray-50 rounded-2xl border border-gray-100 flex flex-col h-full shadow-sm opacity-50 md:opacity-100">
+            <!-- Review 9 -->
+            <div class="p-8 bg-gray-50 rounded-2xl border border-gray-100 flex flex-col h-full shadow-sm">
+              <div class="flex gap-1 mb-4 text-brand-gold text-xs">★★★★★</div>
+              <p class="text-gray-600 font-light text-sm mb-8 flex-1 italic">"The results on our showroom floor were beyond expectations. Clear communication and pure pride in their craftsmanship."</p>
+              <div class="flex items-center gap-4">
+                <div class="w-10 h-10 rounded-full bg-brand-gold flex items-center justify-center text-white font-black text-xs">JW</div>
+                <div><span class="block text-brand-dark font-black text-xs uppercase">Jeff W.</span><span class="block text-gray-400 text-[10px] uppercase font-bold">St. Albert, AB</span></div>
+              </div>
+            </div>
+          </div>
+          <!-- Slide 4 (Clone of Slide 1 for perfect loop) -->
+          <div class="flex-shrink-0 w-full grid grid-cols-1 md:grid-cols-3 gap-8 px-2">
+            <div class="p-8 bg-gray-50 rounded-2xl border border-gray-100 flex flex-col h-full shadow-sm">
               <div class="flex gap-1 mb-4 text-brand-gold text-xs">★★★★★</div>
               <p class="text-gray-600 font-light text-sm mb-8 flex-1 italic">"The team was professional from start to finish. The attention to detail on our kitchen cabinets was incredible."</p>
               <div class="flex items-center gap-4">
                 <div class="w-10 h-10 rounded-full bg-brand-blue flex items-center justify-center text-white font-black text-xs">MR</div>
                 <div><span class="block text-brand-dark font-black text-xs uppercase">Michael R.</span><span class="block text-gray-400 text-[10px] uppercase font-bold">Edmonton, AB</span></div>
+              </div>
+            </div>
+            <div class="p-8 bg-gray-50 rounded-2xl border border-gray-100 flex flex-col h-full shadow-sm">
+              <div class="flex gap-1 mb-4 text-brand-gold text-xs">★★★★★</div>
+              <p class="text-gray-600 font-light text-sm mb-8 flex-1 italic">"The exterior of our home looks brand new. They were on time, clean, and the quality is far superior."</p>
+              <div class="flex items-center gap-4">
+                <div class="w-10 h-10 rounded-full bg-brand-red flex items-center justify-center text-white font-black text-xs">SJ</div>
+                <div><span class="block text-brand-dark font-black text-xs uppercase">Sarah J.</span><span class="block text-gray-400 text-[10px] uppercase font-bold">Calgary, AB</span></div>
+              </div>
+            </div>
+            <div class="p-8 bg-gray-50 rounded-2xl border border-gray-100 flex flex-col h-full shadow-sm">
+              <div class="flex gap-1 mb-4 text-brand-gold text-xs">★★★★★</div>
+              <p class="text-gray-600 font-light text-sm mb-8 flex-1 italic">"Exceptional service. They repaired our drywall and painted the entire main floor in 3 days."</p>
+              <div class="flex items-center gap-4">
+                <div class="w-10 h-10 rounded-full bg-brand-gold flex items-center justify-center text-white font-black text-xs">DL</div>
+                <div><span class="block text-brand-dark font-black text-xs uppercase">David L.</span><span class="block text-gray-400 text-[10px] uppercase font-bold">St. Albert, AB</span></div>
               </div>
             </div>
           </div>
@@ -1386,14 +1413,27 @@
         }, 300);
       });
     }
-    // Reviews Carousel Logic
+    // Seamless Infinite Reviews Carousel Logic
     const reviewsTrack = document.getElementById('reviews-track');
     if (reviewsTrack) {
       let currentSlide = 0;
+      const totalSlides = 3; // Slides 1, 2, 3 (Slide 4 is a clone)
+      
       setInterval(() => {
-        currentSlide = (currentSlide + 1) % 3; // Shift between 3 slides
+        currentSlide++;
+        reviewsTrack.style.transition = 'transform 0.7s ease-in-out';
         reviewsTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
-      }, 5000); // 5 seconds interval
+
+        // If we just reached the dummy slide (the clone)
+        if (currentSlide === totalSlides) {
+          setTimeout(() => {
+            // Instantly skip back to slide 0 without transition
+            reviewsTrack.style.transition = 'none';
+            currentSlide = 0;
+            reviewsTrack.style.transform = 'translateX(0)';
+          }, 700); // Wait for the transition above to finish
+        }
+      }, 5000);
     }
   </script>
 </body>
