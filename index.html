@@ -1899,7 +1899,7 @@
               <div>
                 <label class="block text-xs font-black uppercase text-gray-500 mb-2 tracking-widest">Project
                   Type</label>
-                <select
+                <select name="project_type"
                   class="w-full px-5 py-4 rounded-xl border border-gray-200 focus:border-brand-blue outline-none bg-gray-50 font-bold text-brand-dark cursor-pointer">
                   <option>Interior Painting</option>
                   <option>Exterior Painting</option>
@@ -1909,7 +1909,7 @@
               </div>
               <div>
                 <label class="block text-xs font-black uppercase text-gray-500 mb-2 tracking-widest">Location</label>
-                <select
+                <select name="location"
                   class="w-full px-5 py-4 rounded-xl border border-gray-200 focus:border-brand-blue outline-none bg-gray-50 font-bold text-brand-dark cursor-pointer">
                   <option>Edmonton & Area</option>
                   <option>Calgary & Area</option>
@@ -1920,20 +1920,20 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label class="block text-xs font-black uppercase text-gray-500 mb-2 tracking-widest">Full Name</label>
-                <input type="text" placeholder="Your Name"
+                <input name="name" type="text" placeholder="Your Name"
                   class="w-full px-5 py-4 rounded-xl border border-gray-200 focus:border-brand-blue outline-none bg-gray-50 font-bold text-brand-dark" />
               </div>
               <div>
                 <label class="block text-xs font-black uppercase text-gray-500 mb-2 tracking-widest">Phone
                   Number</label>
-                <input type="tel" placeholder="(780) 000-0000"
+                <input name="phone" type="tel" placeholder="(780) 000-0000"
                   class="w-full px-5 py-4 rounded-xl border border-gray-200 focus:border-brand-blue outline-none bg-gray-50 font-bold text-brand-dark" />
               </div>
             </div>
             <div>
               <label class="block text-xs font-black uppercase text-gray-500 mb-2 tracking-widest">Project
                 Details</label>
-              <textarea rows="4" placeholder="Briefly describe your project..."
+              <textarea name="details" rows="4" placeholder="Briefly describe your project..."
                 class="w-full px-5 py-4 rounded-xl border border-gray-200 focus:border-brand-blue outline-none bg-gray-50 font-bold text-brand-dark resize-none"></textarea>
             </div>
             <button type="submit"
@@ -2034,16 +2034,44 @@
     const closeModalBtn = document.getElementById('close-modal-btn');
 
     if (contactForm && successModal && modalContent && closeModalBtn) {
-      contactForm.addEventListener('submit', (e) => {
+      contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        console.log('Form submission intercepted');
+        
+        const formData = new FormData(contactForm);
+        const data = Object.fromEntries(formData.entries());
+        
+        const submitBtn = contactForm.querySelector('button[type="submit"]');
+        const originalBtnText = submitBtn.innerHTML;
+        submitBtn.innerHTML = 'Sending...';
+        submitBtn.disabled = true;
 
-        // Show modal with animation
-        successModal.classList.remove('hidden');
-        setTimeout(() => {
-          modalContent.classList.remove('scale-95', 'opacity-0');
-          modalContent.classList.add('scale-100', 'opacity-100');
-        }, 50);
+        try {
+          const response = await fetch('/api/submit', {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          });
+
+          if (response.ok) {
+            // Show modal with animation
+            successModal.classList.remove('hidden');
+            setTimeout(() => {
+              modalContent.classList.remove('scale-95', 'opacity-0');
+              modalContent.classList.add('scale-100', 'opacity-100');
+            }, 50);
+            contactForm.reset();
+          } else {
+            alert('Something went wrong. Please try again or contact us directly.');
+          }
+        } catch (error) {
+          console.error('Submission error:', error);
+          alert('Error connecting to service. Please try again.');
+        } finally {
+          submitBtn.innerHTML = originalBtnText;
+          submitBtn.disabled = false;
+        }
       });
 
       closeModalBtn.addEventListener('click', () => {
