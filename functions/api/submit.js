@@ -12,9 +12,9 @@ export async function onRequestPost(context) {
     const { project_type, location, name, phone, details } = data;
 
     if (!env.RESEND_API_KEY) {
-      return new Response(JSON.stringify({ error: 'RESEND_API_KEY is not configured in Cloudflare environment variables.' }), { 
+      return new Response(JSON.stringify({ error: 'RESEND_API_KEY is not configured in Cloudflare environment variables.' }), {
         status: 500,
-        headers: corsHeaders 
+        headers: corsHeaders
       });
     }
 
@@ -28,7 +28,7 @@ export async function onRequestPost(context) {
       },
       body: JSON.stringify({
         from: 'Filcan Pride Website <onboarding@resend.dev>',
-        to: ['traderisemarketing@outlook.com'],
+        to: ['jay@filcanpainting.ca'],
         reply_to: name ? `${name} <${phone}@no-email.com>` : 'no-reply@resend.dev',
         subject: `New Lead: ${name || 'Inquiry'} - ${project_type || 'General'}`,
         html: `
@@ -53,23 +53,23 @@ export async function onRequestPost(context) {
     const result = await resendResponse.json();
 
     if (resendResponse.ok) {
-      return new Response(JSON.stringify({ success: true, id: result.id }), { 
+      return new Response(JSON.stringify({ success: true, id: result.id }), {
         status: 200,
-        headers: corsHeaders 
+        headers: corsHeaders
       });
     } else {
       console.error('Resend Error:', result);
-      return new Response(JSON.stringify({ error: result.message || 'Failed to send email' }), { 
+      return new Response(JSON.stringify({ error: result.message || 'Failed to send email' }), {
         status: resendResponse.status,
-        headers: corsHeaders 
+        headers: corsHeaders
       });
     }
 
   } catch (err) {
     console.error('Server Catch Error:', err);
-    return new Response(JSON.stringify({ error: 'Internal Server Error' }), { 
+    return new Response(JSON.stringify({ error: 'Internal Server Error' }), {
       status: 500,
-      headers: corsHeaders 
+      headers: corsHeaders
     });
   }
 }
